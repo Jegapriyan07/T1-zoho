@@ -1,6 +1,13 @@
 (function ($) {
   "use strict";
 
+  var DESIGN_WIDTH = 1720;
+
+  function fitDesignToViewport() {
+    var scale = Math.min(1, window.innerWidth / DESIGN_WIDTH);
+    document.documentElement.style.zoom = String(scale);
+  }
+
   var components = [
     { id: "hero", path: "src/components/hero.html" },
     { id: "stats-marquee", path: "src/components/stats-marquee.html" },
@@ -71,8 +78,11 @@
     chain.done(function () {
       initLogoMarquee();
       initSecurityScrollHint();
+      fitDesignToViewport();
     });
   }
 
+  $(window).on("resize", fitDesignToViewport);
+  $(fitDesignToViewport);
   $(loadComponents);
 })(jQuery);
