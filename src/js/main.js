@@ -63,6 +63,50 @@
     });
   }
 
+  function initCounters() {
+    var $numbers = $(".stats-marquee__number");
+    if (!$numbers.length) {
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var $target = $(entry.target);
+          if ($target.data("animated")) return;
+          $target.data("animated", true);
+
+          var targetVal = $target.data("target-val");
+          var suffix = $target.data("suffix");
+          
+          $({ countNum: 1 }).animate({ countNum: targetVal }, {
+            duration: 2000,
+            easing: "swing",
+            step: function () {
+              $target.text(Math.floor(this.countNum) + suffix);
+            },
+            complete: function () {
+              $target.text(targetVal + suffix);
+            }
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    $numbers.each(function () {
+      var $el = $(this);
+      var text = $el.text();
+      var match = text.match(/^(\d+)(.*)$/);
+      if (match) {
+        $el.data("target-val", parseInt(match[1], 10));
+        $el.data("suffix", match[2]);
+        $el.text("1" + match[2]); // Set to 1 initially
+        observer.observe(this);
+      }
+    });
+  }
+
   function loadComponents() {
     var $page = $("#platform-page");
     var chain = $.Deferred().resolve();
@@ -78,6 +122,7 @@
     chain.done(function () {
       initLogoMarquee();
       initSecurityScrollHint();
+      initCounters();
       fitDesignToViewport();
     });
   }
