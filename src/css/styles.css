@@ -99,10 +99,7 @@ a {
 
 .hero__gradient {
   position: absolute;
-  top: 0;
-  left: -1px;
-  width: 1720px;
-  height: 964px;
+  inset: 0;
   pointer-events: none;
 }
 
@@ -154,7 +151,7 @@ a {
   position: absolute;
   top: 217px;
   left: 220px;
-  width: 587px;
+  width: 612px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -164,10 +161,11 @@ a {
 .hero__title {
   margin: 0;
   width: 612px;
+  height: 66px;
   max-width: 100%;
   font-size: 44px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 66px;
   letter-spacing: -0.88px;
 }
 
@@ -181,6 +179,9 @@ a {
 
 .hero__body {
   margin: 0;
+  width: 510px;
+  height: 128px;
+  max-width: 100%;
   font-size: 20px;
   font-weight: 400;
   line-height: 32px;
@@ -203,7 +204,7 @@ a {
   pointer-events: none;
 }
 
-.hero__visual img {
+.hero__visual img {  
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -631,8 +632,8 @@ a {
   gap: 16px;
   padding: 32px 24px;
   background: #ffffff;
-  border: 0.746px solid var(--security-card-border);
-  border-radius: 8.958px;
+  border: 1px solid var(--security-card-border);
+  border-radius: 16px;
   box-shadow: 0 14.93px 8.958px rgba(16, 24, 40, 0.08), 0 5.972px 2.986px rgba(16, 24, 40, 0.03);
 }
 
